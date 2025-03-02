@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .certificate {
+            width: 210mm;
+            height: 297mm;
+            background-image: url("{{ url_for('static', filename='uploads/background.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="certificate border border-gray-300 shadow-lg">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+            <img src="{{ url_for('static', filename='uploads/photo.jpg') }}" class="absolute top-10 right-10 w-32 h-32 rounded-full border-4 border-white shadow-lg">
+            <h1 class="text-4xl font-bold mb-6">Certificate of Assignment</h1>
+            <p class="text-xl mb-4">This certifies that <br><span class="font-semibold font-bold">{{ full_name }}</span></p>
+            <p class="text-xl mb-4">born on <span class="font-semibold font-bold">{{ date_of_birth }}</span></p>
+            <p class="text-xl mb-4">has been assigned as <span class="font-semibold font-bold"><br>
+                {{ title }}</span></p>
+            <p class="text-xl mb-4">Issued on: <span class="font-semibold">{{ issue_date }}</span></p>
+        </div>
+        
+        <div class="absolute bottom-20 left-20 text-sm">
+            <p class="font-semibold">Issued By: {{ issued_by_name }}</p>
+            <p class="font-semibold">Position: {{ issued_by_position }}</p>
+            <img src="{{ url_for('static', filename='uploads/signature.png') }}" class="w-32 h-16 mt-2">
+        </div>
+        <br>
+        <div class="absolute bottom-4 left-20 text-sm">
+            <p>KHMER DEMOCRACY ORGANIZATION(KDO) INC.</p>
+            <p>6 Temple CT, Noble Park, Vic 3174</p>
+            <p>Email: hq@kdo.org.au | Phone: (+61)0395444950</p>
+            <p>Website: kdo.org.au</p>
+        </div>
+    </div>
+    <div class="mt-8">
+        <a href="{{ url_for('download_certificate', full_name=full_name, date_of_birth=date_of_birth, title=title, issue_date=issue_date, issued_by_name=issued_by_name, issued_by_position=issued_by_position) }}" class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">Download PDF</a>
+    </div>
+</body>
+</html>
